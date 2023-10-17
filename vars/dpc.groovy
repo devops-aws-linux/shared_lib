@@ -1,7 +1,7 @@
-def callCustomFunction(params) {
-    def toolName = params.toolName
-    def additionalArguments = params.additionalArguments
-    def reportPattern = params.reportPattern
+def callDpcTool(Map args) {
+    def toolName = args.toolName
+    def additionalArguments = args.additionalArguments
+    def reportPattern = args.reportPattern
 
     def additionalArgs = additionalArguments.trim()
     sh """
@@ -9,7 +9,7 @@ def callCustomFunction(params) {
         ${additionalArgs} \\
         --odcInstallation=${toolName}
     """
-    
+
     step([
         $class: 'DependencyCheckPublisher',
         pattern: reportPattern
